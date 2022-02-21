@@ -12,7 +12,9 @@ function BurritoTaste() {
   if (status === 'loading') {
     return <p>Fetching burrito flavor...</p>;
   }
-  return <p>The burrito is {data['Short Name']}!</p>;
+  // return <p>The burrito is CINDY{data['Short Name']}!</p>;
+  return <p>The burrito is CINDY</p>;
+
 }
 
 function App() {
