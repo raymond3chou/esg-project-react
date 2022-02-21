@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import PropTypes from 'prop-types';
+
+import {
+    DataGrid,
+    GridToolbarContainer,
+    GridToolbarFilterButton,
+  } from '@mui/x-data-grid';
 
 import Securities from './Securities';
 
@@ -52,10 +58,22 @@ const pageToHeight = {
     10:400,
     25:750
 }
+
+const CustomToolbar = ({ setFilterButtonEl }) => (
+    <GridToolbarContainer>
+      <GridToolbarFilterButton ref={setFilterButtonEl} />
+    </GridToolbarContainer>
+  );
+  
+  CustomToolbar.propTypes = {
+    setFilterButtonEl: PropTypes.func.isRequired,
+  };
+
 export default function Table() {
     const rows = Securities()
     const [height, setHeight] = React.useState(400);
     const [pageSize, setPageSize] = React.useState(10);
+    const [filterButtonEl, setFilterButtonEl] = React.useState(null);
 
     return (
         <div style={{ height, width: '100%' }}>
@@ -69,6 +87,17 @@ export default function Table() {
                     setHeight(pageToHeight[newPageSize])
                 }}
                 rowsPerPageOptions={[5, 10, 25]}
+                components={{
+                    Toolbar: CustomToolbar,
+                  }}
+                  componentsProps={{
+                    panel: {
+                      anchorEl: filterButtonEl,
+                    },
+                    toolbar: {
+                      setFilterButtonEl,
+                    },
+                  }}
                 // checkboxSelection
                 // disableSelectionOnClick
             />
