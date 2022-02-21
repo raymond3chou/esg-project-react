@@ -1,14 +1,16 @@
 import './App.css';
 import { getFirestore } from 'firebase/firestore';
 import { FirestoreProvider, useFirebaseApp } from 'reactfire';
-import DenseTable from './components/DenseTable'
+// import DenseTable from './components/DenseTable'
+import Table from './components/Table'
+import SearchAppBar from './components/SearchBarApp';
 
 function App() {
   const firestoreInstance = getFirestore(useFirebaseApp());
   return (
     <FirestoreProvider sdk={firestoreInstance}>
-      <h1>Project ESG</h1>
-      <DenseTable />
+      <SearchAppBar />
+      <Table />
     </FirestoreProvider>
   );
 }
